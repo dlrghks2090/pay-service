@@ -7,8 +7,13 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name="user")
-@Data
+@Getter
+@Builder
+@AllArgsConstructor
 public class User {
+
+    public User() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +23,9 @@ public class User {
     private String name;
 
     @Column(nullable = false)
+    private String pwd;
+
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
@@ -25,5 +33,6 @@ public class User {
 
     @Column(nullable = false)
     private Long point;
+
 
 }
