@@ -6,6 +6,8 @@ import com.example.payservice.domain.dto.UserDetailDto;
 import com.example.payservice.domain.dto.UserListDto;
 import com.example.payservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,8 +29,10 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public UserListDto getUserByAll() {
-        return null;
+    public Page<UserListDto> findAllUsers(Pageable pageable) {
+        Page<User> users = userRepository.findAll(pageable);
+
+        return users.map(UserListDto::new);
     }
 
     public UserDetailDto getUserById(Long id) {
